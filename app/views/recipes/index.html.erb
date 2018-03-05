@@ -1,0 +1,204 @@
+  <%= render "recipes/banner" %>
+  <button onclick="topFunction()" id="topbtn" title="Go to top">Top</button>
+
+
+<!-- <h2 class="text-center">ALL OUR RECIPES:</h2> -->
+
+<div class="container container-recipes" id="container-recipes">
+
+  <div class="row" id="recipes">
+
+    <% if @recipes.blank? %>
+      <h4>There are no recipes containing the term <%= params[:search] %>.</h4>
+    <% end %>
+
+    <% @recipes.each do |recipe| %>
+
+      <div class="col-xs-12 col-sm-3 col-md-3">
+
+        <div class="card-container">
+
+          <%= link_to recipe_path(recipe) do %>
+            <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0)), url('<%= if recipe.picture.url == nil
+                image_path('https://placeholdit.co//i/500x500?')
+              else
+                cl_image_path recipe.picture.url
+              end
+              %>')">
+            </div>
+          <% end %>
+
+          <div class="card-description">
+            <% arr = [] %>
+            <%if recipe.reviews.size != 0 %>
+              <% recipe.reviews.each do |review| %>
+                <% arr << review.rating %>
+              <% end %>
+              <% average = arr.inject{ |sum, el| sum + el }.to_f / arr.size %>
+              <% average.round(0).times do %>
+              <p class="fa fa-star"></p>
+              <%end%>
+
+              <% (5-average.round(0)).times do %>
+              <p class="fa fa-star-o"></p>
+              <%end%>
+
+            <%end%>
+          </div>
+
+          <div class="link-box">
+            <%= link_to recipe_path(recipe) do %>
+              <%=recipe.name.capitalize %>
+              <% if current_user %>
+                <% if Favorite.where(recipe_id: recipe.id, user_id: current_user.id).count > 0 %>
+                  <%= link_to favorite_path(recipe), :method => :delete, remote: true, class: "favorite" do %>
+                     &nbsp &nbsp<span class="fa fa-heart info"></span>
+                  <% end %>
+                <% else %>
+                  <%= link_to favorites_path(recipe_id: recipe.id), :method => :post, remote: true, class: "favorite" do %>
+                   &nbsp &nbsp <span class="fa fa-heart-o"></span>
+                  <% end %>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+
+        </div>
+
+      </div>
+
+    <% end %>
+
+  </div>
+</div>
+
+
+<%= content_for :after_js do %>
+
+  <script>
+  const btns = document.querySelectorAll('.favorite');
+  btns.forEach((btn) => {
+    btn.addEventListener('click', (event) => {
+        const span = btn.querySelector('span');
+        span.classList.toggle('fa-heart');
+        span.classList.toggle('fa-heart-o');
+    });
+  });
+
+
+  // ALGOLIA
+  var client = algoliasearch("NT0MM889NI", "3773b457ace95ffa42c5aeccd38270c6");
+  var index_recipe = client.initIndex('Recipe_production');
+  var index_ingredient = client.initIndex("Ingredient_production");
+
+  const searchbar = document.getElementById("aa-search-input");
+  const recipes = document.getElementById('recipes');
+
+  const banner = document.getElementById("banner");
+  const marketing_promise = document.getElementById("marketing-promise");
+  var recipe_html = recipes.innerHTML;
+  var banner_class = banner.classList;
+  var banner_html = banner.innerHTML;
+  var marketing_promise_html = marketing_promise.innerHTML;
+
+  function capitalize(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+  function downcase(string) {
+    return string.charAt(0).toLowerCase() + string.slice(1);
+  }
+
+
+
+  const search = (event) => {
+    index_recipe.search(
+      {
+        query: searchbar.textContent,
+        hitsPerPage: 10,
+        ignorePlurals: true,
+      },
+      function searchDone(err, content) {
+        recipes.innerHTML = "";
+        marketing_promise.innerHTML = "<br><br>";
+        banner.classList.remove("banner");
+        banner.classList.add("banner-search");
+
+        if (!searchbar.textContent == "") {
+          content.hits.forEach((hit) => {
+
+            recipes.insertAdjacentHTML("beforeend", `
+              <div class="col-xs-12 col-sm-3 col-md-3">
+                <div class="card-container">
+                  <a href="/recipes/${hit.objectID}">
+                    <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0)), url('${hit.picture.picture.url}')">
+                    </div>
+                  </a>
+                  <div class="link-box">
+                    <a href="/recipes/${hit.objectID}">${hit.name}</a>
+                  </div>
+                </div>
+              </div>
+            `)
+          })
+        } else {
+          recipes.insertAdjacentHTML("beforeend", `${recipe_html}`);
+          banner.classList.remove('banner-search');
+          banner.classList.add("banner");
+          marketing_promise.innerHTML = marketing_promise_html;
+        }
+      }
+    );
+  }
+
+  searchbar.addEventListener("keyup", search);
+
+  var lastQuery = '';
+  $('#aa-search-input').textcomplete([
+    {
+      // #3 - Regular expression used to trigger the autocomplete dropdown
+      match: /(^|\s)[^\s](\w*(?:\s*\w*))$/,
+      // #4 - Function called at every new keystroke
+      search: function(query, callback) {
+        lastQuery = query;
+        index_ingredient.search(lastQuery, { hitsPerPage: 5 })
+          .then(function searchSuccess(content) {
+            if (content.query === lastQuery) {
+              callback(content.hits);
+            }
+          })
+          .catch(function searchFailure(err) {
+            console.error(err);
+          });
+      },
+      // #5 - Template used to display each result obtained by the Algolia API
+      template: function (hit) {
+        // Returns the highlighted version of the name attribute
+        // if (!searchbar.value == "") {
+          return '<img src="'+ hit.picture.picture.url +'" /></div>' + downcase(hit._highlightResult.name.value) + '';
+        // }
+      },
+      // #6 - Template used to display the selected result in the textarea
+      replace: function (hit) {
+        var html = '<a class="tag-item" href="">';
+        html += '<div class="picture-wrapper"><img src="'+ hit.picture.picture.url +'" /></div>';
+        html += '<span class="label">' + capitalize(hit.name) + '</span></a>';
+        html += " "
+        return html;
+      },
+
+    }
+  ], {
+      // #7 - Special adapter to handle HTMLContentEditable divs
+      adapter: $.fn.textcomplete.HTMLContentEditable,
+  });
+
+  // prevent default behaviour of the search form (i.e prevent from refreshing)
+  const bindConfirm = (element) => {
+    element.addEventListener("submit", (event) => {
+        event.preventDefault();
+    });
+  };
+  document.querySelectorAll(".confirmable").forEach(bindConfirm)
+
+  </script>
+<% end %>

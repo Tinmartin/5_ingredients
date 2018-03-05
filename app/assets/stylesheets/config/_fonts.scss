@@ -1,0 +1,27 @@
+// Import Google fonts
+@import url("https://fonts.googleapis.com/css?family=Droid+Sans|Work+Sans");
+
+// Define fonts for body and headers
+$body-font: "Droid Sans", sans-serif;
+$headers-font: "Raleway", sans-serif;
+
+
+h1,h2 {
+  font-family: "Raleway", sans-serif !important;
+}
+
+
+h3,h4 {
+  font-family: 'Roboto', sans-serif;
+
+}
+
+// To use a font file (.woff) uncomment following lines
+// @font-face {
+//   font-family: "Font Name";
+//   src: font-url('FontFile.eot');
+//   src: font-url('FontFile.eot?#iefix') format('embedded-opentype'),
+//        font-url('FontFile.woff') format('woff'),
+//        font-url('FontFile.ttf') format('truetype')
+// }
+// $my-font: "Font Name";
