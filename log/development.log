@@ -5536,3 +5536,28 @@ Processing by RecipesController#index as HTML
 Completed 200 OK in 2023ms (Views: 2012.0ms | ActiveRecord: 6.2ms)
 
 
+Started GET "/" for 127.0.0.1 at 2018-03-06 16:06:25 +0100
+  [1m[36mActiveRecord::SchemaMigration Load (6.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by RecipesController#index as HTML
+  Rendering recipes/index.html.erb within layouts/application
+  Rendered recipes/_banner.html.erb (0.5ms)
+  [1m[36mRecipe Load (12.2ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  [1m[35m (7.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."recipe_id" = $1[0m  [["recipe_id", 1]]
+  Rendered recipes/index.html.erb within layouts/application (124.4ms)
+  Rendered shared/_navbar.html.erb (3.1ms)
+  Rendered shared/_footer.html.erb (0.6ms)
+Completed 200 OK in 1820ms (Views: 1782.3ms | ActiveRecord: 29.7ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-03-06 16:06:33 +0100
+Processing by RecipesController#index as HTML
+  Rendering recipes/index.html.erb within layouts/application
+  Rendered recipes/_banner.html.erb (0.3ms)
+  [1m[36mRecipe Load (0.6ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."recipe_id" = $1[0m  [["recipe_id", 1]]
+  Rendered recipes/index.html.erb within layouts/application (7.5ms)
+  Rendered shared/_navbar.html.erb (2.0ms)
+  Rendered shared/_footer.html.erb (0.3ms)
+Completed 200 OK in 70ms (Views: 65.1ms | ActiveRecord: 1.3ms)
+
+

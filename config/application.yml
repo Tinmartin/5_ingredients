@@ -11,16 +11,16 @@ production:
   FB_ID: "151863338748492"
   FB_SECRET: "2cccf35844efff0067f202649fb6ec78"
 
-# Algolia - Clefs de Martin :
-development:
-  ALGOLIA_SECRET_KEY: '6fef301f8999e01837857ec583f640fd'
-production:
-  ALGOLIA_SECRET_KEY: '6fef301f8999e01837857ec583f640fd'
-
-development:
-  SEARCH_ONLY_API_KEY: "990f99b5fd9adb8ef29762c2504b48c3"
-production:
-  SEARCH_ONLY_API_KEY: "990f99b5fd9adb8ef29762c2504b48c3"
+#Algolia - Clefs de Martin :
+#development:
+#ALGOLIA_SECRET_KEY: '6fef301f8999e01837857ec583f640fd'
+#production:
+#ALGOLIA_SECRET_KEY: '6fef301f8999e01837857ec583f640fd'
+#
+#development:
+#SEARCH_ONLY_API_KEY: "990f99b5fd9adb8ef29762c2504b48c3"
+#production:
+#SEARCH_ONLY_API_KEY: "990f99b5fd9adb8ef29762c2504b48c3"
 
 # Devise - Nico ? :
 development:
