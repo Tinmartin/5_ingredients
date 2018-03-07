@@ -25,4 +25,3 @@
   recipe.remote_picture_url = "https://www.astucesdefilles.com/wp-content/uploads/2015/08/crevettes1.jpg"
   recipe.save
 end
-

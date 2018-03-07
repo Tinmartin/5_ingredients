@@ -1,5 +1,5 @@
 class Recipe < ApplicationRecord
-  include AlgoliaSearch
+#  include AlgoliaSearch
 
   has_many :ingredients, through: :doses
   has_many :doses, dependent: :destroy
@@ -10,12 +10,12 @@ class Recipe < ApplicationRecord
   validates :name, presence: true
   mount_uploader :picture, PhotoUploader
 
-   algoliasearch per_environment: true do
-    attribute :name
-    attribute :picture
-    attribute :ingredients
-    searchableAttributes ['ingredients']
-  end
+#   algoliasearch per_environment: true do
+#    attribute :name
+#    attribute :picture
+#    attribute :ingredients
+#    searchableAttributes ['ingredients']
+#  end
 
   def inline_ingredients
     ingredients.to_a.map(&:name).join(' ')
