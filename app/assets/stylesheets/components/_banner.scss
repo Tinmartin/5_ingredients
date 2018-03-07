@@ -1,7 +1,5 @@
 .banner {
-  background-image: linear-gradient(-219deg, rgba(255, 49, 77,0.7) 0%, rgba(0, 84, 122,0.5) 40%), url('https://images.pexels.com/photos/5938/food-salad-healthy-lunch.jpg?w=940&h=650&auto=compress&cs=tinysrgb');
-  transition: all 0.3s ease;
-  height: 500px !important;
+  height: 20px !important;
   padding: 0px 30px;
   display: flex;
   align-items: center;
@@ -28,20 +26,4 @@
 
 .banner p{
   color: white;
-}
-
-.banner-search {
-  background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('https://images.pexels.com/photos/5938/food-salad-healthy-lunch.jpg?w=940&h=650&auto=compress&cs=tinysrgb');
-  transition: all 0.3s ease;
-  height: 0px !important;
-  padding: 0px 30px;
-  display: flex;
-  align-items: center;
-  top: 0px;
-  font-family:  "Raleway", sans-serif;;
-  background-size: cover !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
 }
