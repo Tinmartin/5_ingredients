@@ -1,4 +1,7 @@
-/* Front concernant la navbar commune */
+/*
+Front concernant la navbar commune
+Pour modifier la barre de recherche, se rendre dans _searchbar.scss
+*/
 
 .navbar {
   background: #4ADCB5;
@@ -8,7 +11,7 @@
   top: 0px;
   justify-content: space-between;
   text-align: center;
-  position: sticky !important;
+  position: sticky !important; /* sticky -> reste en place, malgré le scroll */
   z-index: 1;
 }
 
@@ -16,6 +19,9 @@
 .navbar-logo img {
   height: 20px;
 }
+
+
+
 
 /* User Avatar */
 .navbar-wagon .avatar {
@@ -95,10 +101,6 @@
   text-decoration: none;
   color: #999999;
 }
-// .custom-search-form{
-//     margin-top:5px;
-// }
-
 
 #search.form-control {
   height: 59px;

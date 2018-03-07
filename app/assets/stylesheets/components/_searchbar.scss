@@ -1,8 +1,9 @@
 .aa-input-container {
   display: inline-block;
   position: relative;
-
+  left: -5px;
   }
+
 .aa-input-search {
   width: 15vh;
   text-align: left;
@@ -41,20 +42,7 @@
   right: 16px;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
-  fill: #e4e4e4; }
-
-
-// .aa-suggestion {
-//   padding: 12px;
-//   cursor: pointer;
-// }
-// .aa-suggestion + .aa-suggestion {
-//     border-top: 1px solid rgba(228, 228, 228, 0.6);
-// }
-// .aa-suggestion:hover, .aa-suggestion.aa-cursor {
-//     background-color: rgba(241, 241, 241, 0.35); }
-
-
+  fill: #4ADCB5; }
 
 .autocomplete-textarea {
   min-height: 40px;
