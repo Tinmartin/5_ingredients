@@ -1,5 +1,4 @@
 <div class="container">
-  <div class="row">
     <div class="banner">
       <% if @recipes.blank? %>
         <h2>There are no recipes with this term <%= params[:search] %>.</h2>
@@ -44,8 +43,6 @@
       </div>
 
     <% end %>
-
-  </div>
 </div>
 
 <!--
