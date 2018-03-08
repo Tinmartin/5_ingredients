@@ -2,19 +2,19 @@
 
 <!-- <h2 class="text-center">ALL OUR RECIPES:</h2> -->
 
-<div class="container container-recipes" id="container-recipes">
+<div class="container">
+  <div class="row">
+    <div class="banner">
+      <% if @recipes.blank? %>
+        <h2>There are no recipes with this term <%= params[:search] %>.</h2>
+        <% else %>
+        <h3><b> Recettes</b></h3>
+      <% end %>
+    </div>
+  <% @recipes.each do |recipe| %>
+    <div class="col-xs-6 col-sm-4 col-md-3">
 
-  <div class="row" id="recipes">
-
-    <% if @recipes.blank? %>
-      <h4>There are no recipes with this term <%= params[:search] %>.</h4>
-    <% end %>
-
-    <% @recipes.each do |recipe| %>
-
-      <div class="col-xs-12 col-sm-3 col-md-3">
-
-        <div class="card-container">
+        <div class="card-all-recipes">
 
           <%= link_to recipe_path(recipe) do %>
             <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0)), url('<%= if recipe.picture.url == nil
@@ -36,11 +36,9 @@
               <% average.round(0).times do %>
               <p class="fa fa-star"></p>
               <%end%>
-
               <% (5-average.round(0)).times do %>
               <p class="fa fa-star-o"></p>
               <%end%>
-
             <%end%>
           </div>
 
