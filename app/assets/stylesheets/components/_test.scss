@@ -112,16 +112,6 @@
 //     }
 
 
-.card-description {
-  position:absolute;
-  bottom:-28px;
-  left:0;
-  width:100%;
-  text-align:center;
-  transform:translateY(-50%); /* doesn't work in IE9 and older I'm affraid */
-  margin:0;
-}
-
 .favorites .card-container {
   border: 1px solid #D3E0E2;
   margin-bottom:30px;

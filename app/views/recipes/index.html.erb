@@ -26,22 +26,6 @@
             </div>
           <% end %>
 
-          <div class="card-description">
-            <% arr = [] %>
-            <%if recipe.reviews.size != 0 %>
-              <% recipe.reviews.each do |review| %>
-                <% arr << review.rating %>
-              <% end %>
-              <% average = arr.inject{ |sum, el| sum + el }.to_f / arr.size %>
-              <% average.round(0).times do %>
-              <p class="fa fa-star"></p>
-              <%end%>
-              <% (5-average.round(0)).times do %>
-              <p class="fa fa-star-o"></p>
-              <%end%>
-            <%end%>
-          </div>
-
           <div class="link-box">
             <%= link_to recipe_path(recipe) do %>
               <%=recipe.name.capitalize %>
