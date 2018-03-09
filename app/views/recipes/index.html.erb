@@ -1,54 +1,49 @@
+<!-- On a un container qui englobe toute la page sous la navbar.
+  Dedans il y a une banner avec le titre "Recettes".
+  En dessous les cartes en responsive, nommées total-card-recipes, et composées d'une photo nommée card-picture, et du titre avec le coeur des favoris en JS nommé card-name-link -->
+
 <div class="container">
-    <div class="banner">
-      <% if @recipes.blank? %>
-        <h2>There are no recipes with this term <%= params[:search] %>.</h2>
-        <% else %>
-        <h3><b> Recettes</b></h3>
-      <% end %>
-    </div>
+  <div class="banner">
+    <% if @recipes.blank? %>
+      <h2>There are no recipes with this term <%= params[:search] %>.</h2>
+      <% else %>
+      <h3><b> Recettes</b></h3>
+    <% end %>
+  </div>
   <% @recipes.each do |recipe| %>
     <div class="col-xs-6 col-sm-4 col-md-3">
-
-        <div class="card-all-recipes">
-
+      <div class="total-card-recipes col-xs-12">
+        <%= link_to recipe_path(recipe) do %>
+          <div class="card-picture" style="background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0)), url('<%= if recipe.picture.url == nil
+              image_path('https://placeholdit.co//i/500x500?')
+            else
+              cl_image_path recipe.picture.url
+            end
+            %>')">
+          </div>
+        <% end %>
           <%= link_to recipe_path(recipe) do %>
-            <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0)), url('<%= if recipe.picture.url == nil
-                image_path('https://placeholdit.co//i/500x500?')
-              else
-                cl_image_path recipe.picture.url
-              end
-              %>')">
-            </div>
-          <% end %>
-
-          <div class="link-box">
-            <%= link_to recipe_path(recipe) do %>
-              <%=recipe.name.capitalize %>
-              <% if current_user %>
-                <% if Favorite.where(recipe_id: recipe.id, user_id: current_user.id).count > 0 %>
-                  <%= link_to favorite_path(recipe), :method => :delete, remote: true, class: "favorite" do %>
-                     &nbsp &nbsp<span class="fa fa-heart info"></span>
-                  <% end %>
-                <% else %>
-                  <%= link_to favorites_path(recipe_id: recipe.id), :method => :post, remote: true, class: "favorite" do %>
+            <div class='petit-texte'><%=recipe.name.capitalize %>
+            <% if current_user %>
+              <% if Favorite.where(recipe_id: recipe.id, user_id: current_user.id).count > 0 %>
+                <%= link_to favorite_path(recipe), :method => :delete, remote: true, class: "favorite" do %>
+                  &nbsp &nbsp<span class="fa fa-heart"></span>
+                <% end %>
+              <% else %>
+                <%= link_to favorites_path(recipe_id: recipe.id), :method => :post, remote: true, class: "favorite" do %>
                    &nbsp &nbsp <span class="fa fa-heart-o"></span>
-                  <% end %>
                 <% end %>
               <% end %>
             <% end %>
-          </div>
-
-        </div>
-
+            </div>
+          <% end %>
       </div>
-
-    <% end %>
+    </div>
+  <% end %>
 </div>
 
-<!--
-
+<!-- Ci dessous le code en JS permemttant de faire changer le coeur des favoris -->
 <%= content_for :after_js do %>
-
   <script>
   const btns = document.querySelectorAll('.favorite');
   btns.forEach((btn) => {
@@ -59,6 +54,8 @@
     });
   });
 
+
+/* Code a garder en attendant de savoir ce qu'on va faire. Algolia ou autre.
 
   // ALGOLIA
   var client = algoliasearch("NT0MM889NI", "3773b457ace95ffa42c5aeccd38270c6");
@@ -83,7 +80,6 @@
   }
 
 
-
   const search = (event) => {
     index_recipe.search(
       {
@@ -102,12 +98,12 @@
 
             recipes.insertAdjacentHTML("beforeend", `
               <div class="col-xs-12 col-sm-3 col-md-3">
-                <div class="card-container">
+                <div class="total-card-recipes">
                   <a href="/recipes/${hit.objectID}">
                     <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0)), url('${hit.picture.picture.url}')">
                     </div>
                   </a>
-                  <div class="link-box">
+                  <div class="card-name-link">
                     <a href="/recipes/${hit.objectID}">${hit.name}</a>
                   </div>
                 </div>
@@ -174,7 +170,9 @@
   };
   document.querySelectorAll(".confirmable").forEach(bindConfirm)
 
+*/
+
   </script>
 <% end %>
 
--->
+
