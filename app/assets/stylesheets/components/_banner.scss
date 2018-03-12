@@ -1,29 +1,16 @@
+/*--------------------------------------------------------------------
+Correspond à la partie dans laquelle on met le titre "Recettes:"
+dans l'index, entre la navbar et les cards des recettes
+--------------------------------------------------------------------*/
+
 .banner {
-  height: 20px !important;
-  padding: 0px 30px;
-  display: flex;
-  align-items: center;
-  font-family:  "Raleway", sans-serif;;
-  top: 0px;
-  background-size: cover !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  color: black;
+  padding-left: 10px;
 }
 
-.banner h2{
-  color: white;
-}
-
-.banner h3{
- color: white;
-}
-
-.banner h1{
-  color: white;
-}
-
-.banner p{
-  color: white;
+.banner h3 {
+  margin-top: 20px;
+  margin-bottom: -5px;
+  margin-left: 20px;
+  font-size: 20px;
 }

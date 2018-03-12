@@ -1,7 +1,5 @@
-/*
-Front concernant la navbar commune
-Pour modifier la barre de recherche, se rendre dans _searchbar.scss
-*/
+/*Front concernant la navbar commune
+Pour modifier la barre de recherche, se rendre dans _searchbar.scss */
 
 .navbar {
   background: #4ADCB5;
@@ -13,6 +11,7 @@ Pour modifier la barre de recherche, se rendre dans _searchbar.scss
   text-align: center;
   position: sticky !important; /* sticky -> reste en place, malgré le scroll */
   z-index: 1;
+  margin-bottom: 0px;
 }
 
 /* Logo central */
@@ -26,7 +25,7 @@ Pour modifier la barre de recherche, se rendre dans _searchbar.scss
 /* User Avatar */
 .navbar-wagon .avatar {
   height: 40px;
-  width: 40px;
+  width: 40px··;
   border-radius: 80%;
 }
 
