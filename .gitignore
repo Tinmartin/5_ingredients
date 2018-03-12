@@ -1,0 +1,19 @@
+.bundle
+log/*.log
+tmp/**/*
+tmp
+*.swp
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+.DS_Store
+public/assets
+
+
+# Ignore application configuration
+/config/application.yml
+/config/secrets.yml
+/public/packs
+/public/packs-test
+/node_modules
