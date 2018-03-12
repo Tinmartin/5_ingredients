@@ -6067,3 +6067,30 @@ Processing by RecipesController#index as HTML
 Completed 200 OK in 2102ms (Views: 2058.7ms | ActiveRecord: 36.0ms)
 
 
+Started GET "/recipes/1" for 127.0.0.1 at 2018-03-12 19:04:11 +0100
+  [1m[36mActiveRecord::SchemaMigration Load (9.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by RecipesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mRecipe Load (0.4ms)[0m  [1m[34mSELECT  "recipes".* FROM "recipes" WHERE "recipes"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering recipes/show.html.erb within layouts/application
+  [1m[36mDose Load (0.4ms)[0m  [1m[34mSELECT "doses".* FROM "doses" WHERE "doses"."recipe_id" = $1[0m  [["recipe_id", 1]]
+  [1m[36mIngredient Load (0.3ms)[0m  [1m[34mSELECT  "ingredients".* FROM "ingredients" WHERE "ingredients"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mIngredient Load (0.3ms)[0m  [1m[34mSELECT  "ingredients".* FROM "ingredients" WHERE "ingredients"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "reviews" WHERE "reviews"."recipe_id" = $1[0m  [["recipe_id", 1]]
+  Rendered recipes/_reviews.html.erb (257.5ms)
+  Rendered recipes/show.html.erb within layouts/application (400.3ms)
+  Rendered shared/_navbar.html.erb (6.8ms)
+  Rendered shared/_footer.html.erb (0.5ms)
+Completed 200 OK in 2176ms (Views: 2111.4ms | ActiveRecord: 18.2ms)
+
+
+Started GET "/" for 127.0.0.1 at 2018-03-12 19:04:14 +0100
+Processing by RecipesController#index as HTML
+  Rendering recipes/index.html.erb within layouts/application
+  [1m[36mRecipe Load (0.5ms)[0m  [1m[34mSELECT "recipes".* FROM "recipes"[0m
+  Rendered recipes/index.html.erb within layouts/application (61.3ms)
+  Rendered shared/_navbar.html.erb (1.5ms)
+  Rendered shared/_footer.html.erb (0.3ms)
+Completed 200 OK in 120ms (Views: 115.4ms | ActiveRecord: 0.5ms)
+
+
