@@ -5,7 +5,7 @@
 <div class="container">
   <div class="banner">
     <% if @recipes.blank? %>
-      <h2>There are no recipes with this term <%= params[:search] %>.</h2>
+      <h2>Il n'y pas de recette disponible <%= params[:search] %>.</h2>
       <% else %>
       <h3><b> Recettes</b></h3>
     <% end %>
